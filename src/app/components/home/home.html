@@ -1,0 +1,80 @@
+<div class="home-container">
+
+  <mat-card class="pretraga-card">
+    <mat-card-title>🔍 Pretraga igračaka</mat-card-title>
+    <mat-card-content>
+      <div class="filteri">
+        <mat-form-field appearance="outline">
+          <mat-label>Naziv</mat-label>
+          <input matInput [(ngModel)]="pretragaNaziv" (ngModelChange)="pretrazi()" placeholder="npr. LEGO">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tip</mat-label>
+          <mat-select [(ngModel)]="filtarTip" (ngModelChange)="pretrazi()">
+            <mat-option value="">Svi tipovi</mat-option>
+            @for (tip of tipovi; track tip) {
+              <mat-option [value]="tip">{{ tip }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Uzrast</mat-label>
+          <mat-select [(ngModel)]="filtarUzrast" (ngModelChange)="pretrazi()">
+            <mat-option value="">Svi uzrasti</mat-option>
+            @for (uzrast of uzrasti; track uzrast) {
+              <mat-option [value]="uzrast">{{ uzrast }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Za koga</mat-label>
+          <mat-select [(ngModel)]="filtarGrupa" (ngModelChange)="pretrazi()">
+            <mat-option value="">Svi</mat-option>
+            <mat-option value="devojčica">Devojčica</mat-option>
+            <mat-option value="dečak">Dečak</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="dugmad">
+        <button mat-stroked-button (click)="resetuj()">
+          <mat-icon>clear</mat-icon> Resetuj filtere
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="igracke-grid">
+    @for (igracka of filtrirane; track igracka.toyId) {
+      <mat-card class="igracka-card">
+        <img mat-card-image [src]="getSlikaUrl(igracka.imageUrl)" [alt]="igracka.name">
+        <mat-card-header>
+          <mat-card-title>{{ igracka.name }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ igracka.type.name }} | {{ igracka.ageGroup.name }} | {{ igracka.targetGroup }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ igracka.description }}</p>
+          <p class="cena">{{ igracka.price }} RSD</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="otvoriDetalje(igracka)">
+            <mat-icon>info</mat-icon> Detalji
+          </button>
+          <button mat-raised-button color="accent" (click)="dodajUKorpu(igracka)">
+            <mat-icon>add_shopping_cart</mat-icon> Rezerviši
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    }
+
+    @if (filtrirane.length === 0) {
+      <p class="nema-rezultata">Nema igračaka za zadatu pretragu.</p>
+    }
+  </div>
+</div>

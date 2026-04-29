@@ -1,0 +1,27 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #ff6b35, #ff6b9d) !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+mat-toolbar span:first-child {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+button[mat-button] {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.active-link {
+  background-color: rgba(255,255,255,0.25);
+  border-radius: 8px;
+}

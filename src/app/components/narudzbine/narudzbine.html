@@ -1,0 +1,36 @@
+<div class="narudzbine-container">
+  <h2>Moje narudžbine</h2>
+
+  @if (narudzbine.length === 0) {
+    <mat-card class="prazno">
+      <mat-card-content>
+        <mat-icon>inbox</mat-icon>
+        <p>Nemate narudžbina.</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @for (n of narudzbine; track n.id) {
+    <mat-card class="narudzbina-card" [class.pristiglo]="n.status === 'pristiglo'" [class.otkazano]="n.status === 'otkazano'">
+      <div class="narudzbina-sadrzaj">
+        <img [src]="getSlikaUrl(n.igracka.imageUrl)" [alt]="n.igracka.name">
+        <div class="narudzbina-info">
+          <h3>{{ n.igracka.name }}</h3>
+          <p>Datum: {{ n.datum }}</p>
+          <p>Količina: <strong>{{ n.kolicina }}</strong></p>
+          <p class="cena">{{ n.ukupno }} RSD</p>
+          <div class="status-badge" [class.zeleno]="n.status === 'pristiglo'" [class.crveno]="n.status === 'otkazano'">
+            @if (n.status === 'pristiglo') {
+              Pristiglo
+            } @else {
+               Otkazano — nedovoljno sredstava
+            }
+          </div>
+        </div>
+        <button mat-icon-button color="warn" (click)="ukloni(n.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  }
+</div>

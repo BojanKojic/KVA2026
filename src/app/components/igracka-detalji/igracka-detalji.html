@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ igracka.name }}</h2>
+
+<mat-dialog-content>
+  <img [src]="getSlikaUrl(igracka.imageUrl)" [alt]="igracka.name" class="slika">
+
+  <div class="info">
+    <p><strong>Tip:</strong> {{ igracka.type.name }}</p>
+    <p><strong>Uzrast:</strong> {{ igracka.ageGroup.name }}</p>
+    <p><strong>Za:</strong> {{ igracka.targetGroup }}</p>
+    <p><strong>Datum proizvodnje:</strong> {{ igracka.productionDate }}</p>
+    <p><strong>Cena:</strong> <span class="cena">{{ igracka.price }} RSD</span></p>
+    <p><strong>Status:</strong> {{ igracka.status }}</p>
+  </div>
+
+  <p class="opis">{{ igracka.description }}</p>
+
+  <h3>Recenzije korisnika</h3>
+  @if (!igracka.recenzije || igracka.recenzije.length === 0) {
+    <p class="nema">Još nema recenzija.</p>
+  }
+  @for (recenzija of igracka.recenzije ?? []; track recenzija.autor) {
+    <div class="recenzija">
+      <strong>{{ recenzija.autor }}</strong>
+      <span>{{ zvezdice(recenzija.ocena) }}</span>
+      <p>{{ recenzija.tekst }}</p>
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="zatvori()">
+    <mat-icon>close</mat-icon> Zatvori
+  </button>
+  <button mat-raised-button color="accent" (click)="rezervisi()">
+    <mat-icon>add_shopping_cart</mat-icon> Rezerviši
+  </button>
+</mat-dialog-actions>

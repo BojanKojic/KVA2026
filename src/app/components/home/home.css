@@ -1,0 +1,95 @@
+.home-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.pretraga-card {
+  margin-bottom: 32px;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+  border-top: 5px solid #ff6b35;
+  padding: 8px;
+}
+
+.pretraga-card mat-card-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ff6b35;
+  margin-bottom: 8px;
+}
+
+.filteri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.filteri mat-form-field {
+  flex: 1;
+  min-width: 180px;
+}
+
+.dugmad {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.igracke-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.igracka-card {
+  border-radius: 16px !important;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+  background: white !important;
+}
+
+.igracka-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.2) !important;
+}
+
+.igracka-card img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.igracka-card mat-card-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+.igracka-card mat-card-subtitle {
+  font-size: 0.8rem;
+  color: #636e72;
+}
+
+.cena {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ff6b35;
+  margin-top: 8px !important;
+}
+
+.nema-rezultata {
+  grid-column: 1/-1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+  padding: 60px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px 16px !important;
+}

@@ -1,0 +1,91 @@
+<div class="profil-container">
+  <mat-card class="profil-card">
+    <mat-card-header>
+      <mat-card-title> Moj profil</mat-card-title>
+      @if (korisnik) {
+        <mat-card-subtitle>{{ korisnik.ime }} {{ korisnik.prezime }}</mat-card-subtitle>
+      }
+    </mat-card-header>
+
+    <mat-card-content [formGroup]="forma">
+
+      @if (sacuvano) {
+        <p class="uspeh"> Podaci su uspešno sačuvani!</p>
+      }
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Ime</mat-label>
+        <input matInput formControlName="ime">
+        <mat-icon matSuffix>person</mat-icon>
+        @if (greska('ime')) {
+          <mat-error>{{ greska('ime') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Prezime</mat-label>
+        <input matInput formControlName="prezime">
+        <mat-icon matSuffix>person</mat-icon>
+        @if (greska('prezime')) {
+          <mat-error>{{ greska('prezime') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-icon matSuffix>email</mat-icon>
+        @if (greska('email')) {
+          <mat-error>{{ greska('email') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Telefon</mat-label>
+        <input matInput formControlName="telefon">
+        <mat-icon matSuffix>phone</mat-icon>
+        @if (greska('telefon')) {
+          <mat-error>{{ greska('telefon') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Adresa</mat-label>
+        <input matInput formControlName="adresa">
+        <mat-icon matSuffix>home</mat-icon>
+        @if (greska('adresa')) {
+          <mat-error>{{ greska('adresa') }}</mat-error>
+        }
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="sacuvaj()">
+        <mat-icon>save</mat-icon> Sačuvaj izmene
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- BALANS KARTICA -->
+  @if (korisnik) {
+    <mat-card class="balans-card">
+      <mat-card-header>
+        <mat-card-title> Stanje na računu</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="balans-iznos">{{ korisnik.balans }} RSD</p>
+
+        <mat-form-field appearance="outline" class="puno-sirine">
+          <mat-label>Iznos za dodavanje</mat-label>
+          <input matInput type="number" [(ngModel)]="dodajSredstva" placeholder="npr. 5000">
+          <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" (click)="dodajNovac()">
+          <mat-icon>add</mat-icon> Dodaj sredstva
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

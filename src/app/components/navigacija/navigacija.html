@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <span routerLink="/" style="cursor:pointer"> IgrackеShop</span>
+  <span class="spacer"></span>
+
+  <button mat-button [routerLink]="['/']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon>home</mat-icon> Početna
+  </button>
+
+  <button mat-button [routerLink]="['/korpa']" routerLinkActive="active-link">
+    <mat-icon [matBadge]="brojStavki" matBadgeColor="warn">shopping_cart</mat-icon>
+    Korpa
+  </button>
+
+  @if (!jeUlogovan) {
+    <button mat-button [routerLink]="['/login']" routerLinkActive="active-link">
+      <mat-icon>login</mat-icon> Prijava
+    </button>
+    <button mat-button [routerLink]="['/registracija']" routerLinkActive="active-link">
+      <mat-icon>person_add</mat-icon> Registracija
+    </button>
+  }
+
+  @if (jeUlogovan) {
+    <button mat-button [routerLink]="['/narudzbine']" routerLinkActive="active-link">
+      <mat-icon>inbox</mat-icon> Narudžbine
+    </button>
+    <button mat-button [routerLink]="['/profil']" routerLinkActive="active-link">
+      <mat-icon>person</mat-icon> Profil
+    </button>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon> Odjava
+    </button>
+  }
+</mat-toolbar>

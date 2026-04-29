@@ -1,0 +1,54 @@
+<div class="korpa-container">
+  <h2>🛒 Moja korpa</h2>
+
+  @if (korpa.stavke.length === 0) {
+    <mat-card class="prazna-korpa">
+      <mat-card-content>
+        <mat-icon>shopping_cart</mat-icon>
+        <p>Korpa je prazna. Dodajte igračke sa početne stranice!</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @for (stavka of korpa.stavke; track stavka.igracka.toyId) {
+    <mat-card class="stavka-card">
+      <div class="stavka-sadrzaj">
+        <img [src]="getSlikaUrl(stavka.igracka.imageUrl)" [alt]="stavka.igracka.name">
+        <div class="stavka-info">
+          <h3>{{ stavka.igracka.name }}</h3>
+          <p>{{ stavka.igracka.type.name }} | {{ stavka.igracka.ageGroup.name }}</p>
+          <p>Količina: <strong>{{ stavka.kolicina }}</strong></p>
+          <p class="cena">{{ stavka.igracka.price * stavka.kolicina }} RSD</p>
+          <div class="status-red">
+            <mat-form-field appearance="outline" class="status-select">
+              <mat-label>Status</mat-label>
+              <mat-select
+                [value]="stavka.status"
+                (valueChange)="promeniStatus(stavka.igracka.toyId, $event)">
+                @for (s of statusi; track s) {
+                  <mat-option [value]="s">{{ s }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="akcije">
+          <button mat-raised-button color="primary" (click)="kupi(stavka)">
+            <mat-icon>payment</mat-icon> Kupi
+          </button>
+          <button mat-icon-button color="warn" (click)="ukloni(stavka.igracka.toyId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  }
+
+  @if (korpa.stavke.length > 0) {
+    <mat-card class="ukupno-card">
+      <mat-card-content>
+        <h3>Ukupno: <span class="ukupna-cena">{{ korpa.ukupna_cena }} RSD</span></h3>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

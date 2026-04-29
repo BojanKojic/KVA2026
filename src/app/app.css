@@ -1,0 +1,6 @@
+.sadrzaj {
+  margin-top: 70px;
+  padding: 20px;
+  min-height: calc(100vh - 70px);
+  background: #fff9f0;
+}

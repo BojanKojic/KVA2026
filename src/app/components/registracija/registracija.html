@@ -1,0 +1,83 @@
+<div class="registracija-container">
+  <mat-card class="registracija-card">
+    <mat-card-header>
+      <mat-card-title>📝 Registracija</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content [formGroup]="forma">
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Ime</mat-label>
+        <input matInput formControlName="ime" placeholder="Marko">
+        <mat-icon matSuffix>person</mat-icon>
+        @if (greska('ime')) {
+          <mat-error>{{ greska('ime') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Prezime</mat-label>
+        <input matInput formControlName="prezime" placeholder="Markovic">
+        <mat-icon matSuffix>person</mat-icon>
+        @if (greska('prezime')) {
+          <mat-error>{{ greska('prezime') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="marko@email.com">
+        <mat-icon matSuffix>email</mat-icon>
+        @if (greska('email')) {
+          <mat-error>{{ greska('email') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Telefon</mat-label>
+        <input matInput formControlName="telefon" placeholder="0601234567">
+        <mat-icon matSuffix>phone</mat-icon>
+        @if (greska('telefon')) {
+          <mat-error>{{ greska('telefon') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Adresa</mat-label>
+        <input matInput formControlName="adresa" placeholder="Beograd, Srbija">
+        <mat-icon matSuffix>home</mat-icon>
+        @if (greska('adresa')) {
+          <mat-error>{{ greska('adresa') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Lozinka</mat-label>
+        <input matInput formControlName="lozinka" type="password">
+        <mat-icon matSuffix>lock</mat-icon>
+        @if (greska('lozinka')) {
+          <mat-error>{{ greska('lozinka') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="puno-sirine">
+        <mat-label>Potvrdi lozinku</mat-label>
+        <input matInput formControlName="lozinka2" type="password">
+        <mat-icon matSuffix>lock</mat-icon>
+        @if (forma.errors?.['lozinkeRazlicite'] && forma.get('lozinka2')?.touched) {
+          <mat-error>Lozinke se ne poklapaju!</mat-error>
+        }
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="registruj()">
+        <mat-icon>person_add</mat-icon> Registruj se
+      </button>
+      <button mat-button routerLink="/login">
+        Već imate nalog? Prijavite se
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
